@@ -28,6 +28,16 @@ public class JsonTest : MonoBehaviour {
         writer.Close();
 
     }
+
+    [ContextMenu("Load")]
+    void Load()
+    {
+        var info = new FileInfo(Application.streamingAssetsPath + "\\" + "hoge.json");
+        var reader = new StreamReader(info.OpenRead());
+        var json = reader.ReadToEnd();
+        var data = JsonUtility.FromJson<Item>(json);
+        data.Dump();
+    }
 }
 
 [Serializable]
@@ -36,6 +46,15 @@ public class Item : ItemBase
     public int ID;
     public float time;
     public string hoge;
+
+    public void Dump()
+    {
+        Debug.Log(BaseID);
+        Debug.Log(BaseTime);
+        Debug.Log(ID);
+        Debug.Log(time);
+        Debug.Log(hoge);
+    }
 }
 
 [Serializable]
